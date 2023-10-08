@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from aplic.models import Endereco, Professor, Aluno, Curso, Instituicao, Telefone, Parceria, Equipe, Projeto
+from aplic.models import Endereco, Professor, Aluno, Curso, Instituicao, Telefone, Parceria, Equipe, Projeto, Ods, Atividade
 
 # Register your models here.
 
@@ -38,4 +38,12 @@ class EquipeAdmin(admin.ModelAdmin):
 
 @admin.register(Projeto)
 class ProjetoAdmin(admin.ModelAdmin):
-    list_display = ('descricao', 'ano', 'periodo_realizacao', 'area_atuacao', 'resumo', 'justificativa', 'fundamentacao_teorica', 'metodologia', 'referencia', 'objetivos_gerais', 'resultados_esperados') 
+    list_display = ('descricao', 'ano', 'periodo_realizacao', 'area_atuacao', 'resumo', 'justificativa', 'fundamentacao_teorica', 'metodologia', 'referencia', 'objetivos_gerais', 'resultados_esperados')
+
+@admin.register(Ods)
+class OdsAdmin(admin.ModelAdmin):
+    list_display = ('nome', 'descricao')
+
+@admin.register(Atividade)
+class AtividadeAdmin(admin.ModelAdmin):
+    list_display = ('descricao', 'carga_horaria', 'inicio_atividade', 'conclusao_atividade', 'objetivo', 'status')
