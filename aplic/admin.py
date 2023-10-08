@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from aplic.models import Endereco, Professor, Aluno
+from aplic.models import Endereco, Professor, Aluno, Curso, Instituicao, Telefone, Parceria, Equipe, Projeto
 
 # Register your models here.
 
@@ -15,3 +15,27 @@ class ProfessorAdmin(admin.ModelAdmin):
 @admin.register(Aluno)
 class AlunoAdmin(admin.ModelAdmin):
     list_display = ('matricula',) 
+
+@admin.register(Instituicao)
+class InstituicaoAdmin(admin.ModelAdmin):
+    list_display = ('nome_instituicao', 'cnpj')
+
+@admin.register(Telefone)
+class TelefoneAdmin(admin.ModelAdmin):
+    list_display = ('numero', 'tipo')
+
+@admin.register(Parceria)
+class ParceriaAdmin(admin.ModelAdmin):
+   list_display = ('nome_parceria', 'cnpj', 'email')
+
+@admin.register(Curso)
+class CursoAdmin(admin.ModelAdmin):
+    list_display = ('nome_curso', 'descricao')
+
+@admin.register(Equipe)
+class EquipeAdmin(admin.ModelAdmin):
+    list_display = ('nome_equipe',)
+
+@admin.register(Projeto)
+class ProjetoAdmin(admin.ModelAdmin):
+    list_display = ('descricao', 'ano', 'periodo_realizacao', 'area_atuacao', 'resumo', 'justificativa', 'fundamentacao_teorica', 'metodologia', 'referencia', 'objetivos_gerais', 'resultados_esperados') 
