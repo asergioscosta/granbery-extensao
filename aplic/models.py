@@ -32,6 +32,8 @@ class Aluno(Pessoa):
         verbose_name = _('Aluno')
         verbose_name_plural = _('Alunos')
 
+    def __str__(self):
+        return self.matricula
     
 class Professor(Pessoa):
     professor = (
@@ -126,6 +128,9 @@ class Endereco(models.Model):
         verbose_name = _('Endereço')
         verbose_name_plural = _('Endereços')
 
+    def __str__(self):
+        return self.logradouro
+    
 class Parceria(models.Model):
     nome_parceria = models.CharField(_('Nome da Parceria'), max_length=100)
     cnpj = models.CharField(_('CNPJ'), max_length=11)
