@@ -1,87 +1,9 @@
 from django.db import models
+import random
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
-class Pessoa(models.Model):
-    sexos = (
-         ("F", "Feminino"),
-         ("M", "Masculino"),
-         ("NB", "Não Binário")
-    )
-     
-    nome = models.CharField(_('Nome'), max_length=30)
-    sobrenome = models.CharField(_('Sobrenome'), max_length=40)
-    cpf = models.CharField(_('CPF'), max_length=11)
-    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
-    ata_nascimento = models.DateField(_('Data de Nascimento'), blank=True, null=True, help_text=('formato = dd/mm/aaaa'))
-    sexo = models.CharField(max_length=2, blank=False, null=False, choices=sexos)
-
-    class Meta:
-        verbose_name = _('Pessoa')
-        verbose_name_plural = _('Pessoa')
-
-    def __str__(self):
-        return self.nome
-    
-    
-class Aluno(Pessoa):
-    matricula = models.IntegerField(_('Matrícula'), unique=True)
-
-    class Meta:
-        verbose_name = _('Aluno')
-        verbose_name_plural = _('Alunos')
-
-    def __str__(self):
-        return self.matricula
-    
-class Professor(Pessoa):
-    professor = (
-        ('Professor', 'Professor'),
-        ('Orientador', 'Orientador'),
-    )
-
-    area_atuacao = models.CharField(_('Área de Atuação'), max_length=30, blank=False, null=False, choices=professor)
-
-    class Meta:
-        verbose_name = _('Professor')
-        verbose_name_plural = _('Professores')
-
-    def __str__(self):
-        return self.area_atuacao
-
-class Instituicao(models.Model):
-    nome_instituicao = models.CharField(_('Nome da Instituição'), max_length=30)
-    cnpj = models.CharField(_('CNPJ'), max_length=11)
-
-    class Meta:
-        verbose_name = _('Instituição')
-        verbose_name_plural = _('Instituições')
-
-    def __str__(self):
-        return self.nome_instituicao
-    
-class Curso(models.Model):
-    cursos = (
-        ('Administração', 'Administração'),
-        ('Sistemas de Informação', 'Sistemas de Informação'),
-        ('Psicologia', 'Psicologia'),
-        ('Direito', 'Direito'),
-        ('Educação Física', 'Educação Física'),
-    )
-    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False, choices=cursos)
-    descricao = models.TextField(_('Descrição'), max_length=250)
-
-    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
-    instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _('Curso')
-        verbose_name_plural = _('Cursos')
-
-    def __str__(self):
-        return self.nome_curso
-    
 class Endereco(models.Model):
     ufs = (
         ('AC', 'Acre'),
@@ -121,8 +43,8 @@ class Endereco(models.Model):
     cidade = models.CharField(_('Cidade'), max_length=20)
     uf = models.CharField('UF', max_length=2, choices=ufs)
 
-    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
-    instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
+    #pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+    #instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
     
     class Meta:
         verbose_name = _('Endereço')
@@ -130,20 +52,6 @@ class Endereco(models.Model):
 
     def __str__(self):
         return self.logradouro
-    
-class Parceria(models.Model):
-    nome_parceria = models.CharField(_('Nome da Parceria'), max_length=100)
-    cnpj = models.CharField(_('CNPJ'), max_length=11)
-    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
-
-    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _('Parceria')
-        verbose_name_plural = _('Parcerias')
-
-    def __str__(self):
-        return self.nome_parceria
 
 class Telefone(models.Model):
     telefone = (
@@ -155,9 +63,9 @@ class Telefone(models.Model):
     numero = models.CharField(_('Número de Telefone'), max_length=20, blank=True, help_text=_('Formato: (xx) xxxxx-xxxx'))
     tipo = models.CharField('Tipo de Telefone', max_length=30, choices=telefone)
     
-    pessoa = models.ForeignKey(Pessoa, null=True, blank=True, on_delete=models.CASCADE)
-    instituicao = models.ForeignKey(Instituicao, null=True, blank=True, on_delete=models.CASCADE)
-    parceria = models.ForeignKey(Parceria, null=True, blank=True, on_delete=models.CASCADE)
+    #pessoa = models.ForeignKey(Pessoa, null=True, blank=True, on_delete=models.CASCADE)
+    #instituicao = models.ForeignKey(Instituicao, null=True, blank=True, on_delete=models.CASCADE)
+    #parceria = models.ForeignKey(Parceria, null=True, blank=True, on_delete=models.CASCADE)
 
     class Meta:
          verbose_name = _('Telefone')
@@ -165,6 +73,105 @@ class Telefone(models.Model):
 
     def __str__(self):
          return self.numero
+    
+class Pessoa(models.Model):
+    sexos = (
+         ("F", "Feminino"),
+         ("M", "Masculino"),
+         ("NB", "Não Binário")
+    )
+     
+    nome = models.CharField(_('Nome'), max_length=30)
+    sobrenome = models.CharField(_('Sobrenome'), max_length=40)
+    cpf = models.CharField(_('CPF'), max_length=11)
+    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
+    data_nascimento = models.DateField(_('Data de Nascimento'), blank=True, null=True, help_text=('formato = dd/mm/aaaa'))
+    sexo = models.CharField(max_length=2, blank=False, null=False, choices=sexos)
+
+    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
+    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Pessoa')
+        verbose_name_plural = _('Pessoa')
+
+    def __str__(self):
+        return self.nome
+        
+class Aluno(Pessoa):
+    matricula = models.IntegerField(_('Matrícula'), unique=True, default=random.randint(10000, 99999))
+
+    class Meta:
+        verbose_name = _('Aluno')
+        verbose_name_plural = _('Alunos')
+
+    def __str__(self):
+        return str(self.matricula)
+    
+class Professor(Pessoa):
+    professor = (
+        ('Professor', 'Professor'),
+        ('Orientador', 'Orientador'),
+    )
+
+    area_atuacao = models.CharField(_('Área de Atuação'), max_length=30, blank=False, null=False, choices=professor)
+    
+    class Meta:
+        verbose_name = _('Professor')
+        verbose_name_plural = _('Professores')
+
+    def __str__(self):
+        return self.area_atuacao
+    
+class Curso(models.Model):
+    cursos = (
+        ('Administração', 'Administração'),
+        ('Sistemas de Informação', 'Sistemas de Informação'),
+        ('Psicologia', 'Psicologia'),
+        ('Direito', 'Direito'),
+        ('Educação Física', 'Educação Física'),
+    )
+    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False, choices=cursos)
+    descricao = models.TextField(_('Descrição'), max_length=250)
+
+    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Curso')
+        verbose_name_plural = _('Cursos')
+
+    def __str__(self):
+        return self.nome_curso
+
+class Instituicao(models.Model):
+    nome_instituicao = models.CharField(_('Nome da Instituição'), max_length=30)
+    cnpj = models.CharField(_('CNPJ'), max_length=11)
+
+    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
+    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
+    curso = models.ForeignKey(Curso, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Instituição')
+        verbose_name_plural = _('Instituições')
+
+    def __str__(self):
+        return self.nome_instituicao
+    
+class Parceria(models.Model):
+    nome_parceria = models.CharField(_('Nome da Parceria'), max_length=100)
+    cnpj = models.CharField(_('CNPJ'), max_length=11)
+    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
+
+    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
+    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Parceria')
+        verbose_name_plural = _('Parcerias')
+
+    def __str__(self):
+        return self.nome_parceria
     
 class Ods(models.Model):
     ods = (
@@ -253,7 +260,7 @@ class Projeto(models.Model):
     resultados_esperados = models.TextField(_('Resultados Esperados'), max_length=255)
 
     atividade = models.ForeignKey(Atividade, null=False, on_delete=models.CASCADE)
-    ods = models.ForeignKey(Ods, null=False, on_delete=models.CASCADE)
+    ods = models.ForeignKey(Ods, null=True, on_delete=models.CASCADE)
     
     class Meta:
         verbose_name = _('Projeto')
@@ -265,7 +272,8 @@ class Projeto(models.Model):
 class Equipe(models.Model):
     nome_equipe = models.CharField(_('Nome da Equipe'), max_length=30)
 
-    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+    aluno = models.ForeignKey(Aluno, null=False, on_delete=models.CASCADE)
+    professor = models.ForeignKey(Professor, null=True, on_delete=models.CASCADE)
     projeto = models.ForeignKey(Projeto, null=False, on_delete=models.CASCADE)
 
     class Meta:
