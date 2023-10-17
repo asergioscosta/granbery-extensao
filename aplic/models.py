@@ -4,6 +4,50 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
+class Pessoa(models.Model):
+    sexos = (
+         ("F", "Feminino"),
+         ("M", "Masculino"),
+         ("NB", "Não Binário")
+    )
+     
+    nome = models.CharField(_('Nome'), max_length=30)
+    sobrenome = models.CharField(_('Sobrenome'), max_length=40)
+    cpf = models.CharField(_('CPF'), max_length=11)
+    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
+    data_nascimento = models.DateField(_('Data de Nascimento'), blank=True, null=True, help_text=('formato = dd/mm/aaaa'))
+    sexo = models.CharField(max_length=2, blank=False, null=False, choices=sexos)
+
+    class Meta:
+        verbose_name = _('Pessoa')
+        verbose_name_plural = _('Pessoa')
+
+    def __str__(self):
+        return self.nome
+
+class Instituicao(models.Model):
+    nome_instituicao = models.CharField(_('Nome da Instituição'), max_length=30)
+    cnpj = models.CharField(_('CNPJ'), max_length=11)
+
+    class Meta:
+        verbose_name = _('Instituição')
+        verbose_name_plural = _('Instituições')
+
+    def __str__(self):
+        return self.nome_instituicao
+
+class Parceria(models.Model):
+    nome_parceria = models.CharField(_('Nome da Parceria'), max_length=100)
+    cnpj = models.CharField(_('CNPJ'), max_length=11)
+    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
+
+    class Meta:
+        verbose_name = _('Parceria')
+        verbose_name_plural = _('Parcerias')
+
+    def __str__(self):
+        return self.nome_parceria
+        
 class Endereco(models.Model):
     ufs = (
         ('AC', 'Acre'),
@@ -43,6 +87,11 @@ class Endereco(models.Model):
     cidade = models.CharField(_('Cidade'), max_length=20)
     uf = models.CharField('UF', max_length=2, choices=ufs)
     
+    instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
+    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+    parceria = models.ForeignKey(Parceria, null=False, on_delete=models.CASCADE)
+    
+
     class Meta:
         verbose_name = _('Endereço')
         verbose_name_plural = _('Endereços')
@@ -60,6 +109,10 @@ class Telefone(models.Model):
     numero = models.CharField(_('Número de Telefone'), max_length=20, blank=True, help_text=_('Formato: (xx) xxxxx-xxxx'))
     tipo = models.CharField('Tipo de Telefone', max_length=30, choices=telefone)
 
+    instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
+    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+    parceria = models.ForeignKey(Parceria, null=False, on_delete=models.CASCADE)
+
     class Meta:
          verbose_name = _('Telefone')
          verbose_name_plural = _('Telefones')
@@ -67,66 +120,6 @@ class Telefone(models.Model):
     def __str__(self):
          return self.numero
 
-class Curso(models.Model):
-    cursos = (
-        ('Administração', 'Administração'),
-        ('Sistemas de Informação', 'Sistemas de Informação'),
-        ('Psicologia', 'Psicologia'),
-        ('Direito', 'Direito'),
-        ('Educação Física', 'Educação Física'),
-    )
-
-    descricao_cursos = (
-        ('Administração', 'O Bacharelado em Administração busca capacitar os alunos a se adaptarem às necessidades das organizações modernas. O curso promove a criatividade, o raciocínio analítico e o desenvolvimento das habilidades de comunicação. Além disso, enfatiza a integração entre ensino, pesquisa e extensão, proporcionando aos alunos experiências práticas por meio de simuladores empresariais e da empresa júnior Granbery Consultoria.'),
-        ('Sistemas de Informação', 'O Bacharelado em Sistemas de Informação tem como objetivo formar profissionais capazes de implementar, planejar e administrar projetos de software e sistemas de informação. Eles elaboram especificações, verificam a viabilidade técnica e financeira, administram sistemas de informação, prestam consultoria, realizam análises e auditorias, conduzem pesquisas tecnológicas e acompanham o avanço da tecnologia para melhorar a qualidade e produtividade.'),
-        ('Psicologia', 'O curso de graduação em Psicologia tem como objetivo formar profissionais capacitados tanto como psicólogos quanto como professores de Psicologia. Ele busca fornecer uma formação técnico-científica sólida e estimular uma atuação crítica e criativa na resolução de problemas, levando em consideração diversos aspectos, incluindo ética e humanismo. O curso inclui estágios práticos a partir do terceiro período, preparando os alunos para atuar em várias áreas.'),
-        ('Direito', 'O curso de Direito visa formar profissionais comprometidos com os princípios do Estado Democrático de Direito e dotados de sólidos conhecimentos socio-políticos e éticos. Esses profissionais são incentivados a contribuir para a preservação dos direitos dos cidadãos, uma administração justa da justiça e a transformação da sociedade por meio de uma consciência crítica.'),
-        ('Educação Física', 'O curso de Educação Física tem como objetivo formar profissionais capacitados para atuar na promoção da saúde, do bem-estar e do condicionamento físico das pessoas. Os alunos adquirem conhecimentos sólidos em anatomia, fisiologia, pedagogia, e demais áreas relacionadas à educação física. Além disso, são preparados para desenvolver atividades físicas adaptadas, promovendo inclusão e atendendo a diversos públicos. O curso enfatiza a importância da prática esportiva e da atividade física como ferramentas para melhorar a qualidade de vida das pessoas.'),
-    )
-    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False, choices=cursos)
-    descricao = models.TextField(_('Descrição'), max_length=30, choices=descricao_cursos)
-
-    class Meta:
-        verbose_name = _('Curso')
-        verbose_name_plural = _('Cursos')
-
-    def __str__(self):
-        return self.nome_curso
-        
-class Pessoa(models.Model):
-    sexos = (
-         ("F", "Feminino"),
-         ("M", "Masculino"),
-         ("NB", "Não Binário")
-    )
-     
-    nome = models.CharField(_('Nome'), max_length=30)
-    sobrenome = models.CharField(_('Sobrenome'), max_length=40)
-    cpf = models.CharField(_('CPF'), max_length=11)
-    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
-    data_nascimento = models.DateField(_('Data de Nascimento'), blank=True, null=True, help_text=('formato = dd/mm/aaaa'))
-    sexo = models.CharField(max_length=2, blank=False, null=False, choices=sexos)
-
-    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
-    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
-    curso = models.ForeignKey(Curso, null=False, on_delete=models.CASCADE)
-    class Meta:
-        verbose_name = _('Pessoa')
-        verbose_name_plural = _('Pessoa')
-
-    def __str__(self):
-        return self.nome
-        
-class Aluno(Pessoa):
-    matricula = models.IntegerField(_('Matrícula'), unique=True, default=random.randint(10000, 99999))
-
-    class Meta:
-        verbose_name = _('Aluno')
-        verbose_name_plural = _('Alunos')
-
-    def __str__(self):
-        return str(self.matricula)
-    
 class Professor(Pessoa):
     professor = (
         ('Professor', 'Professor'),
@@ -141,37 +134,55 @@ class Professor(Pessoa):
 
     def __str__(self):
         return self.area_atuacao
-        
-class Instituicao(models.Model):
-    nome_instituicao = models.CharField(_('Nome da Instituição'), max_length=30)
-    cnpj = models.CharField(_('CNPJ'), max_length=11)
-
-    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
-    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
-    curso = models.ForeignKey(Curso, null=False, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _('Instituição')
-        verbose_name_plural = _('Instituições')
-
-    def __str__(self):
-        return self.nome_instituicao
-
-class Parceria(models.Model):
-    nome_parceria = models.CharField(_('Nome da Parceria'), max_length=100)
-    cnpj = models.CharField(_('CNPJ'), max_length=11)
-    email = models.EmailField(_('E-mail'), blank=True, max_length=200)
-
-    endereco = models.ForeignKey(Endereco, null=False, on_delete=models.CASCADE)
-    telefone = models.ForeignKey(Telefone, null=False, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = _('Parceria')
-        verbose_name_plural = _('Parcerias')
-
-    def __str__(self):
-        return self.nome_parceria
     
+class Equipe(models.Model):
+    nome_equipe = models.CharField(_('Nome da Equipe'), max_length=30)
+
+    professor = models.ForeignKey(Professor, null=True, blank=True, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Equipe')
+        verbose_name_plural = _('Equipes')
+
+    def __str__(self):
+        return self.nome_equipe 
+
+
+class Aluno(Pessoa):
+    matricula = models.IntegerField(_('Matrícula'), unique=True, default=random.randint(10000, 99999))
+
+    equipe = models.ForeignKey(Equipe, null=False, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = _('Aluno')
+        verbose_name_plural = _('Alunos')
+
+    def __str__(self):
+        return str(self.matricula)
+
+class Curso(models.Model):
+    cursos = (
+        ('Administração', 'Administração'),
+        ('Sistemas de Informação', 'Sistemas de Informação'),
+        ('Psicologia', 'Psicologia'),
+        ('Direito', 'Direito'),
+        ('Educação Física', 'Educação Física'),
+    )
+
+    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False, choices=cursos)
+    descricao = models.TextField(_('Descrição'), max_length=30)
+    
+    Instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
+    professor = models.ManyToManyField(Professor)
+    aluno = models.ManyToManyField(Aluno)
+
+    class Meta:
+        verbose_name = _('Curso')
+        verbose_name_plural = _('Cursos')
+
+    def __str__(self):
+        return self.nome_curso
+
 class Ods(models.Model):
     ods = (
         ('Ods 1', 'ODS 1 - Erradicação da pobreza'),
@@ -223,27 +234,6 @@ class Ods(models.Model):
     def __str__(self):
         return self.nome
     
-class Atividade(models.Model):
-    atividade = (
-         ('Realizado', 'Realizado'),
-         ('A Realizar', 'A Realizar'),
-         ('Em Andamento', 'Em Andamento'),
-)
-
-    descricao = models.TextField(_('Descrição'), max_length=255)
-    carga_horaria = models.PositiveIntegerField(_('Carga Horária'))
-    inicio_atividade = models.DateField(_('Início da Atividade'))
-    conclusao_atividade = models.DateField(_('Conclusão da Atividade'), null=True, blank=True)
-    objetivo = models.TextField(_('Objetivo'), max_length=255)
-    status = models.CharField('Status', max_length=20, choices=atividade)
-
-    class Meta:
-        verbose_name = _('Atividade')
-        verbose_name_plural = _('Atividades')
-
-    def __str__(self):
-        return self.descricao
-    
 class Projeto(models.Model):
     nome = models.CharField(_('Nome'), max_length=100)
     descricao = models.TextField(_('Descrição'), max_length=255)
@@ -258,28 +248,38 @@ class Projeto(models.Model):
     objetivos_gerais = models.TextField(_('Objetivos Gerais'), max_length=255)
     resultados_esperados = models.TextField(_('Resultados Esperados'), max_length=255)
 
-    atividade = models.ForeignKey(Atividade, null=False, on_delete=models.CASCADE)
-    parceria = models.ForeignKey(Parceria, null=True, on_delete=models.CASCADE)
-    ods = models.ForeignKey(Ods, null=True, on_delete=models.CASCADE)
-    
+    parceria = models.ManyToManyField(Parceria)
+    ods = models.ManyToManyField(Ods)
+    equipe = models.ForeignKey(Equipe, null=False, on_delete=models.CASCADE)
+
     class Meta:
         verbose_name = _('Projeto')
         verbose_name_plural = _('Projetos')
 
     def __str__(self):
         return self.nome
-    
-class Equipe(models.Model):
-    nome_equipe = models.CharField(_('Nome da Equipe'), max_length=30)
+        
+        
+class Atividade(models.Model):
+    atividade = (
+         ('Realizado', 'Realizado'),
+         ('A Realizar', 'A Realizar'),
+         ('Em Andamento', 'Em Andamento'),
+)
 
-    aluno = models.OneToOneField(Aluno, on_delete=models.CASCADE)
-    professor = models.ForeignKey(Professor, null=True, on_delete=models.CASCADE)
-    projeto = models.OneToOneField(Projeto, on_delete=models.CASCADE)
+    descricao = models.TextField(_('Descrição'), max_length=255)
+    carga_horaria = models.PositiveIntegerField(_('Carga Horária'))
+    inicio_atividade = models.DateField(_('Início da Atividade'))
+    conclusao_atividade = models.DateField(_('Conclusão da Atividade'), null=True, blank=True)
+    objetivo = models.TextField(_('Objetivo'), max_length=255)
+    status = models.CharField('Status', max_length=20, choices=atividade)
+
+    projeto = models.ForeignKey(Projeto, null=False, on_delete=models.CASCADE)
 
     class Meta:
-        verbose_name = _('Equipe')
-        verbose_name_plural = _('Equipes')
+        verbose_name = _('Atividade')
+        verbose_name_plural = _('Atividades')
 
     def __str__(self):
-        return self.nome_equipe 
+        return self.descricao
     
