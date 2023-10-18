@@ -1,6 +1,7 @@
 from django.db import models
 import random
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -25,6 +26,10 @@ class Pessoa(models.Model):
     def __str__(self):
         return self.nome
 
+class Employee(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    pessoa = models.ForeignKey(Pessoa, null=False, on_delete=models.CASCADE)
+    
 class Instituicao(models.Model):
     nome_instituicao = models.CharField(_('Nome da Instituição'), max_length=30)
     cnpj = models.CharField(_('CNPJ'), max_length=11)
