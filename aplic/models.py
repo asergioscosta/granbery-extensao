@@ -1,7 +1,14 @@
 from django.db import models
 import random
+from stdimage.models import StdImageField
+import uuid
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
+
+def get_file_path(_instance, filename):
+    ext = filename.split('.')[-1]
+    filename = f'{uuid.uuid4()}.{ext}'
+    return filename
 
 # Create your models here.
 
@@ -178,6 +185,7 @@ class Curso(models.Model):
     descricao = models.TextField(_('Descrição'), max_length=30)
     
     Instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
+    imagem = StdImageField(_('Imagem'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 260, 'crop': True}})
     professor = models.ManyToManyField(Professor)
     aluno = models.ManyToManyField(Aluno)
 
