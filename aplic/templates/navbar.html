@@ -21,7 +21,7 @@
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent4">
                                 <ul id="nav4" class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                        <a class="page-scroll active" href="#0" data-toggle="collapse"
+                                        <a class="page-scroll active" href="{% url 'index' %}" data-toggle="collapse"
                                             data-target="#sub-nav" aria-controls="sub-nav" aria-expanded="false"
                                             aria-label="Toggle navigation">Página Inicial
                                             <div class="sub-nav-toggler">
@@ -30,10 +30,13 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#">Sobre Nós</a>
+                                        <a class="page-scroll" href="{% url 'sobre' %}">Sobre Nós</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#">Projetos</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="{% url 'cursos' %}">Cursos</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#">Contato</a>

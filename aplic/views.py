@@ -5,3 +5,6 @@ class IndexView(TemplateView):
 
 class SobreView(TemplateView):
     template_name = 'sobre-nos.html'
+
+class CursosView(TemplateView):
+    template_name = 'cursos.html'
