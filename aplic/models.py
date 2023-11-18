@@ -173,17 +173,8 @@ class Aluno(Pessoa):
         return str(self.matricula)
 
 class Curso(models.Model):
-    cursos = (
-        ('Administração', 'Administração'),
-        ('Sistemas de Informação', 'Sistemas de Informação'),
-        ('Psicologia', 'Psicologia'),
-        ('Direito', 'Direito'),
-        ('Educação Física', 'Educação Física'),
-    )
-
-    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False, choices=cursos)
+    nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False)
     descricao = models.TextField(_('Descrição'), max_length=30)
-    
     Instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
     imagem = StdImageField(_('Imagem'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 260, 'crop': True}})
     professor = models.ManyToManyField(Professor)

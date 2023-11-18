@@ -12,82 +12,26 @@
         </div>
 
         <div class="row">
+            {% for curso in cursos %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-feature">
                     <div class="icon">
-                        <i class="lni lni-vector"></i>
+                        <i class="lni lni-graduation"></i>
                     </div>
-                    <div class="content">
-                        <h5>Administração</h5>
-                        <p>Short description for the ones who look for something new.</p>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="icon">
-                        <i class="lni lni-pallet"></i>
-                    </div>
-                    <div class="content">
-                        <h5>Educação Física</h5>
-                        <p>Short description for the ones who look for something new.</p>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="icon">
-                        <i class="lni lni-stats-up"></i>
-                    </div>
-                    <div class="content">
-                        <h5>Direito</h5>
-                        <p>Short description for the ones who look for something new.</p>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="icon">
-                        <i class="lni lni-code-alt"></i>
-                    </div>
-                    <div class="content">
-                        <h5>Educação Física</h5>
-                        <p>Short description for the ones who look for something new.</p>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
+
                     <div class="client-logo wow fadeInUp" data-wow-delay=".2s">
-                        <img src="https://www2.unifap.br/administracao/files/2016/01/adm-volta-as-aulas2.jpg" alt=""
-                            class="w-100">
-                    </div>
-                    <div class="content">
-                        <h5>Psicologia</h5>
-                        <p>Short description for the ones who look for something new.</p>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="client-logo wow fadeInUp" data-wow-delay=".2s">
-                        <img src="https://th.bing.com/th/id/OIP.IGibTxr7ZxmBHgKlaNXFHQHaE8?pid=ImgDet&rs=1" alt=""
-                            class="w-100">
+                        <img src="{{curso.imagem.thumb.url }}" alt="{{ curso.nome }}" class="w-100">
                     </div>
                     <br>
                     <div class="content">
-                        <h5>Sistemas de Informação</h5>
-                        <p>Short description for the ones who look for something new.</p>
+                        <h5>{{curso.nome_curso}}</h5>
+                        <p>{{curso.descricao}}</p>
                         <br>
                         <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
                     </div>
                 </div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </section>
