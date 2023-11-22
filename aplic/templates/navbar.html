@@ -46,6 +46,8 @@
                             </div>
                             <div class="header-search">
                                 <a href="#0"> <i class="lni lni-search-alt"></i> </a>
+                                <form method="get" action="{% url 'curso' %}">
+                                    {{ form.search }}
                                 <form action="#">
                                     <input type="text" placeholder="Buscar">
                                 </form>

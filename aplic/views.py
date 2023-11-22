@@ -1,9 +1,10 @@
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 from django.utils import translation
 from .models import Curso
 from rest_framework import permissions
 from rest_framework import viewsets
 from aplic.serializers import CursoSerializer
+from .forms import CursoSearchForm
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -27,3 +28,16 @@ class CursoViewSet(viewsets.ModelViewSet):
 
     queryset = Curso.objects.all()
     serializer_class = CursoSerializer
+
+def curso(request):
+    template_name = 'cursos.html'
+    form = CursoSearchForm(request.GET)
+    objects = Curso.objects.all()
+
+    if form.is_valid():
+        search = form.cleaned_data['search']
+        if search:
+            objects = objects.filter(nome_curso__icontains=search)
+
+    context = {'object_list': objects, 'form': form}
+    return render(request, template_name, context)
