@@ -1,10 +1,16 @@
-from django.views.generic import TemplateView, ListView
-from django.utils import translation
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView
+
+from rest_framework.decorators import action
+
 from .models import Curso
-from rest_framework import permissions
-from rest_framework import viewsets
-from aplic.serializers import CursoSerializer
-from .forms import CursoSearchForm
+
+from django.utils.translation import gettext as _
+from django.utils import translation
+
+from .forms import ContatoForm
+
+from django.contrib import messages
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -23,21 +29,20 @@ class SobreView(TemplateView):
 class CursosView(TemplateView):
     template_name = 'cursos.html'
 
-class CursoViewSet(viewsets.ModelViewSet):
-    permission_classes = (permissions.DjangoModelPermissions, )
+class ContatoView(TemplateView):
+    template_name = 'contato.html'
+    form_class = ContatoForm
+    success_url = reverse_lazy('contato')
 
-    queryset = Curso.objects.all()
-    serializer_class = CursoSerializer
+    def get_context_data(self, **kwargs):
+        context = super(ContatoView, self).get_context_data(**kwargs)
+        return context
 
-def curso(request):
-    template_name = 'cursos.html'
-    form = CursoSearchForm(request.GET)
-    objects = Curso.objects.all()
+    def form_valid(self, form, *args, **kwargs):
+        form.send_mail()
+        messages.success(self.request, _('E-mail enviado com sucesso'), extra_tags='success')
+        return super(ContatoView, self).form_valid(form, *args, **kwargs)
 
-    if form.is_valid():
-        search = form.cleaned_data['search']
-        if search:
-            objects = objects.filter(nome_curso__icontains=search)
-
-    context = {'object_list': objects, 'form': form}
-    return render(request, template_name, context)
+    def form_invalid(self, form, *args, **kwargs):
+        messages.error(self.request, _('Falha ao enviar e-mail'), extra_tags='danger')
+        return super(ContatoView, self).form_invalid(form, *args, **kwargs)

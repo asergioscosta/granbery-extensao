@@ -1,38 +1,70 @@
 {% load static %}
-<!-- cursos -->
-<section id="features" class="feature-section feature-style-3">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-8">
-                <div class="section-title text-center mb-60">
-                    <h3 class="mb-15">Cursos</h3>
-                    <p>Conheça mais sobre os cursos que integram os projetos de extensão universitária. </p>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap-5.0.0-alpha-2.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/LineIcons.2.0.css' %}">
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static '/css/lindy-uikit.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base-style.css' %}">
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <section id="features" class="feature-section feature-style-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-8">
+                    <div class="section-title text-center mb-60">
+                        <h3 class="mb-15">Cursos</h3>
+                        <p>Conheça mais sobre os cursos que integram os projetos de extensão universitária. </p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row">
-            {% for curso in cursos %}
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="icon">
-                        <i class="lni lni-graduation"></i>
-                    </div>
+            <div class="row">
+                {% for curso in cursos %}
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-feature">
+                        <div class="icon">
+                            <i class="lni lni-graduation"></i>
+                        </div>
 
-                    <div class="client-logo wow fadeInUp" data-wow-delay=".2s">
-                        <img src="{{curso.imagem.thumb.url }}" alt="{{ curso.nome }}" class="w-100">
-                    </div>
-                    <br>
-                    <div class="content">
-                        <h5>{{curso.nome_curso}}</h5>
-                        <p>{{curso.descricao}}</p>
+                        <div class="client-logo wow fadeInUp" data-wow-delay=".2s">
+                            <img src="{{curso.imagem.thumb.url }}" alt="{{ curso.nome }}" class="w-100">
+                        </div>
                         <br>
-                        <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
+                        <div class="content">
+                            <h5>{{curso.nome_curso}}</h5>
+                            <p>{{curso.descricao}}</p>
+                            <br>
+                            <a href="#0" class="button button-lg radius-10">Saiba Mais</a>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
-    </div>
-</section>
-<!-- cursos -->
+    </section>
+    <!-- cursos -->
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

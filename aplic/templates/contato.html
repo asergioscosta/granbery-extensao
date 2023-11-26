@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap-5.0.0-alpha-2.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/LineIcons.2.0.css' %}">
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static '/css/lindy-uikit.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base-style.css' %}">
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <section id="contact" class="contact-section contact-style-3">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
+                    <div class="section-title text-center mb-50">
+                        <h3 class="mb-15">Contato</h3>
+                        <p>Entre em contato conosco, tire suas dúvidas ou envie sugestões.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="contact-form-wrapper">
+                            <form action="assets/php/contact.php" method="POST">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <input type="text" id="nome" name="nome" class="form-input"
+                                                placeholder="Nome">
+                                            <i class="lni lni-user"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <input type="email" id="email" name="email" class="form-input"
+                                                placeholder="E-mail">
+                                            <i class="lni lni-envelope"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <input type="text" id="telefone" name="telefone" class="form-input"
+                                                placeholder="Telefone">
+                                            <i class="lni lni-phone"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="single-input">
+                                            <input type="text" id="assunto" name="assunto" class="form-input"
+                                                placeholder="Assunto">
+                                            <i class="lni lni-text-format"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="single-input">
+                                            <textarea name="mensagem" id="mensagem" class="form-input"
+                                                placeholder="Mensagem" rows="6"></textarea>
+                                            <i class="lni lni-comments-alt"></i>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-button">
+                                            <button type="submit" class="button"> <i
+                                                    class="lni lni-telegram-original"></i>
+                                                Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    {% include 'footer.html' %}
+
+</body>
+
+</html>

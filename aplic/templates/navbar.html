@@ -39,15 +39,13 @@
                                         <a class="page-scroll" href="{% url 'cursos' %}">Cursos</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="page-scroll" href="#">Contato</a>
+                                        <a class="page-scroll" href="{% url 'contato' %}">Contato</a>
                                     </li>
                                 </ul>
 
                             </div>
                             <div class="header-search">
                                 <a href="#0"> <i class="lni lni-search-alt"></i> </a>
-                                <form method="get" action="{% url 'curso' %}">
-                                    {{ form.search }}
                                 <form action="#">
                                     <input type="text" placeholder="Buscar">
                                 </form>
