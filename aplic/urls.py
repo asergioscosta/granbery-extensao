@@ -1,13 +1,16 @@
 from django.urls import path
-
 from rest_framework.routers import SimpleRouter
+from .views import IndexView, SobreView, CursosView, CursoViewSet, ContatoView
+from django.conf import settings
+from django.conf.urls.static import static
 
-from .views import IndexView, SobreView, CursosView, ContatoView
-
+from .views import IndexView, SobreView, CursosView
+router = SimpleRouter()
+router.register('cursos', CursoViewSet)
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path('sobre/', SobreView.as_view(), name='sobre'),
     path('cursos/', CursosView.as_view(), name='cursos'),
     path('contato/', ContatoView.as_view(), name='contato'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

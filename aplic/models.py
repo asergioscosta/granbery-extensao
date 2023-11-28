@@ -174,7 +174,7 @@ class Aluno(Pessoa):
 
 class Curso(models.Model):
     nome_curso = models.CharField(_('Nome do Curso'), max_length=30, blank=False, null=False)
-    descricao = models.TextField(_('Descrição'), max_length=30)
+    descricao = models.TextField(_('Descrição'), max_length=255)
     Instituicao = models.ForeignKey(Instituicao, null=False, on_delete=models.CASCADE)
     imagem = StdImageField(_('Imagem'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 260, 'crop': True}})
     professor = models.ManyToManyField(Professor)

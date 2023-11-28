@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Granbery Extensão</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap-5.0.0-alpha-2.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/LineIcons.2.0.css' %}">
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static '/css/lindy-uikit.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base-style.css' %}">
+
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+testeeees
+    {% include 'cursos.html' %}
+
+    {% include 'footer.html' %}
+    
+
+   
+</body>
+
+</html>

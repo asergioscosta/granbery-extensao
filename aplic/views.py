@@ -2,6 +2,9 @@ from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
 from rest_framework.decorators import action
+from rest_framework import viewsets
+from rest_framework import permissions
+from aplic.serializers import CursoSerializer
 
 from .models import Curso
 
@@ -11,6 +14,8 @@ from django.utils import translation
 from .forms import ContatoForm
 
 from django.contrib import messages
+
+from django.db.models import Q
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -28,6 +33,27 @@ class SobreView(TemplateView):
 
 class CursosView(TemplateView):
     template_name = 'cursos.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CursosView, self).get_context_data(**kwargs)
+        
+        query = self.request.GET.get("iptText")
+        print(query)
+        
+        if (query is None):
+            context['cursos'] = Curso.objects.order_by('id').all()
+            print('não tinha nada digitado no iptText')
+        else:
+            context['cursos'] = Curso.objects.filter(Q(nome_curso__icontains=query))
+            context['cursos'] = Curso.objects.filter(Q(descricao__icontains=query))
+
+        return context
+
+class CursoViewSet(viewsets.ModelViewSet):
+    permission_classes = (permissions.DjangoModelPermissions, )
+
+    queryset = Curso.objects.all()
+    serializer_class = CursoSerializer
 
 class ContatoView(TemplateView):
     template_name = 'contato.html'
