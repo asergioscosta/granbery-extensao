@@ -1,10 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
 
-from rest_framework.decorators import action
 from rest_framework import viewsets
 from rest_framework import permissions
 from aplic.serializers import CursoSerializer
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 
 from .models import Curso
 
@@ -72,3 +73,16 @@ class ContatoView(TemplateView):
     def form_invalid(self, form, *args, **kwargs):
         messages.error(self.request, _('Falha ao enviar e-mail'), extra_tags='danger')
         return super(ContatoView, self).form_invalid(form, *args, **kwargs)
+
+def cliente_login(request):
+    if request.method == 'POST':
+    
+        nome = request.POST.get['nome']
+        senha = request.POST.get['password']
+        cliente = authenticate(request, username=nome, password=senha)
+
+        if cliente is not None:         
+            login(request, cliente)
+            return redirect('/index')
+        
+    return render(request, 'login.html')
