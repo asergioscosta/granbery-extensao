@@ -1,14 +1,11 @@
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView
-
-from rest_framework import viewsets
-from rest_framework import permissions
+from rest_framework import viewsets, permissions
 from aplic.serializers import CursoSerializer
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-
-from .models import Curso
-
+from .models import Curso, User
+from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from django.utils import translation
 
@@ -86,3 +83,24 @@ def cliente_login(request):
             return redirect('/index')
         
     return render(request, 'login.html')
+
+def Cadastro(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get('senha')
+
+        # Verifique se o usuário já existe
+        user_exists = User.objects.filter(username=username).exists()
+
+        if user_exists:
+            return redirect('erro')
+
+        # Crie o usuário
+        user = User.objects.create_user(username=username, password=password)
+
+        return redirect('http://127.0.0.1:8000/')
+    else:
+        return render(request, "cadastro.html")
+
+def erro(request):
+    return render(request, 'erro.html')

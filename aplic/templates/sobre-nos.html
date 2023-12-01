@@ -25,6 +25,7 @@
 
 <body>
     {% include 'navbar.html' %}
+
     <div class="banner-section">
         <div class="banner-area img-bg">
             <div class="container">
@@ -40,10 +41,9 @@
             </div>
         </div>
     </div>
-
-    <br>
     <section id="about" class="about-section about-style-5"
-        style="background-image: url('{% static 'images/granbery/granbery.jpg' %}')">
+    style="background-image: url('{% static 'images/granbery/granbery.jpg' %}')">
+
         <div class="container">
             <div class="row">
                 <div class="col-xl-6 col-lg-8 col-md-10">
@@ -61,6 +61,31 @@
             </div>
         </div>
     </section>
+
+
+    <div class="row">
+        <div class="col-xl-4 col-md-6">
+            <div class="single-testimonial">
+                <div class="content-wrapper">
+                    <div class="info">
+                        <div class="image">
+                            <i class="fa fa-bullsey"></i>
+                        </div>
+                        <div class="text">
+                            <h6>Sara A.K.</h6>
+                            <p>Traveler</p>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Leo duis augue commodo neque
+                            auctor nisl, libero nunc, egestas. Pellentesque senectus.</p>
+                        <div class="quote">
+                            <i class="lni lni-quotation"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     <section id="features" class="feature-section feature-style-3">
         <div class="container">
@@ -128,6 +153,35 @@
         </div>
     </section>
     <!-- cursos -->
+
+    <div class="banner-section">
+        <div class="banner-area img-bg">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+                            <section class="team-section text-center team-style-6">
+                                <div class="col-12">
+                                    <div class="section-title text-center pt-60 mb-60">
+                                        <h3 class="mb-15">Estamos aqui para ouvir você!</h3>
+                                        <p style="color: #fff;">Entre em contato conosco e deixe sua pergunta, sugestão
+                                            ou colaboração.
+                                            Estamos prontos para conversar. </p><br />
+                                        <a href="{% url 'contato' %}" rel="nofollow" target="_blank"
+                                            style="background-color: white; color: #3080E3;"
+                                            class="button radius-30">Entre em Contato</a>
+
+                                    </div>
+                                </div>
+                            </section>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
 
     {% include 'footer.html' %}
 
