@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext as _
 from django.utils import translation
 
+from django.contrib.auth import logout as auth_logout
+
 from .forms import ContatoForm
 
 from django.contrib import messages
@@ -104,3 +106,7 @@ def Cadastro(request):
 
 def erro(request):
     return render(request, 'erro.html')
+
+def custom_logout(request):
+    auth_logout(request)
+    return render(request, "logout.html")

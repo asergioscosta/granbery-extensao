@@ -1,6 +1,8 @@
 {% load static %}
-<div class="container">
-    <!-- footer -->
+
+<!-- ----- navbar ----- -->
+
+<div class="navbar-area fixed-top">
     <header class="header header-4">
         <div class="navbar-area">
             <div class="container">
@@ -41,9 +43,30 @@
                                     <li class="nav-item">
                                         <a class="page-scroll" href="{% url 'contato' %}">Contato</a>
                                     </li>
-                                </ul>
 
+                                    <!-- ----- Início Login ----- -->
+
+                                    <li class="nav-item">
+                                        <a class="page-scroll" href="#0" data-bs-toggle="collapse"
+                                            data-bs-target="#sub-nav2" aria-controls="sub-nav2" aria-expanded="false"
+                                            aria-label="Toggle navigation">Conta
+                                            <div class="sub-nav-toggler">
+                                                <span> <i class="lni lni-chevron-down"></i> </span>
+                                            </div>
+                                        </a>
+                                        <ul class="sub-menu collapse" id="sub-nav2">
+                                            <li><a href="{% url 'login' %}">Entrar</a></li>
+                                            <li><a href="{% url 'logout' %}">Sair</a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
                             </div>
+
+                            <!-- ----- Fim Login ----- -->
+
+                            <!-- ----- Início Buscar ----- -->
+
                             <div class="header-search">
                                 <a href="#0"> <i class="lni lni-search-alt"></i> </a>
                                 <form action="{% url 'cursos' %}">
@@ -51,18 +74,14 @@
                                 </form>
                             </div>
 
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent4">
-                                <ul id="nav4" class="navbar-nav ml-auto">
-                                    <li class="nav-item">
-                                        <a href="{% url 'login' %}" class="signin">Entrar</a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <!-- ----- Fim Buscar ----- -->
+
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- header -->
 </div>
+
+<!-- ----- Navbar ----- -->

@@ -6,20 +6,14 @@ from aplic.models import Employee
 
 from aplic.models import Endereco, Professor, Aluno, Curso, Instituicao, Telefone, Parceria, Equipe, Projeto, Ods, Atividade
 
-# Define an inline admin descriptor for Employee model
-# which acts a bit like a singleton
-
 class EmployeeInline(admin.StackedInline):
     model = Employee
     can_delete = False
     verbose_name_plural = "employee"
 
-# Define a new User admin
 class UserAdmin(BaseUserAdmin):
     inlines = [EmployeeInline]
 
-
-# Re-register UserAdmin
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
