@@ -1,26 +1,28 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nós</title>
+
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
-    <meta name="description" content="" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Augusto Sérgio, Carlos Eduardo, Daniel Vitor">
     <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
 
-    <!-- CSS -->
+    <!-- ----- Início CSS ----- -->
     <link rel="stylesheet" href="{% static '/css/bootstrap-5.0.0-alpha-2.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/LineIcons.2.0.css' %}">
+    <link rel="stylesheet" href="{% static '/css/tiny-slider.css' %}">
+    <link rel="stylesheet" href="{% static '/css/glightbox.min.css' %}">
     <link rel="stylesheet" href="{% static '/css/animate.css' %}">
     <link rel="stylesheet" href="{% static '/css/lindy-uikit.css' %}">
     <link rel="stylesheet" href="{% static '/css/base-style.css' %}">
-
+    <!-- ----- Fim CSS ----- -->
 </head>
 
 <body>
@@ -42,7 +44,7 @@
         </div>
     </div>
     <section id="about" class="about-section about-style-5"
-        style="background-image: url('{% static 'images/granbery/granbery.jpg' %}')">
+        style="background-image: url('{% static 'img/granbery/granbery.jpg' %}')">
 
         <div class="container">
             <div class="row">
@@ -62,8 +64,7 @@
         </div>
     </section>
 
-    <!-- ----- Fundamentos ----- -->
-
+    <!-- ----- Início Fundamentos ----- -->
     <section id="features" class="feature-section feature-style-3">
 
         <div class="container">
@@ -140,95 +141,7 @@
             </div>
         </div>
     </section>
-
-    <!-- ----- Fundamentos ----- -->
-
-            <div class="row justify-content-center">
-                <!-- Bloco da Missão -->
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-testimonial">
-                        <div class="content-wrapper">
-                            <div class="info">
-                                <div class="icon">
-                                    <i class="lni lni-target"></i>                                </div>
-                                <div class="text">
-                                    <h6>MISSÃO</h6>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>
-                                    Conectar conhecimento à prática, promovendo a transformação social por meio da
-                                    educação e da
-                                    extensão universitária. Nosso compromisso é transformar a sociedade em um lugar mais
-                                    empático e
-                                    humano, proporcionando uma experiência enriquecedora para a comunidade.
-                                </p>
-                                <div class="quote">
-                                    <i class="lni lni-quotation"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bloco da Visão -->
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-testimonial">
-                        <div class="content-wrapper">
-                            <div class="info">
-                                <div class="icon">
-                                    <i class="lni lni-eye"></i>
-                                </div>
-                                <div class="text">
-                                    <h6>VISÃO</h6>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>
-                                    Ser um espaço inclusivo que promove a visibilidade e a integração de projetos de
-                                    extensão
-                                    universitária. Buscamos ser reconhecidos como uma referência em compartilhamento de
-                                    conhecimento, conectando a comunidade e a sociedade.
-                                </p>
-                                <div class="quote">
-                                    <i class="lni lni-quotation"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-md-6">
-                    <div class="single-testimonial">
-                        <div class="content-wrapper">
-                            <div class="info">
-                                <div class="icon">
-                                    <i class="lni lni-heart"></i>
-                                </div>
-                                <div class="text">
-                                    <h6>VALORES</h6>
-                                </div>
-                            </div>
-                            <div class="content">
-                                <p>
-                                    Ser um espaço inclusivo que promove a visibilidade e a integração de projetos de
-                                    extensão
-                                    universitária. Buscamos ser reconhecidos como uma referência em compartilhamento de
-                                    conhecimento, conectando a comunidade e a sociedade.
-                                </p>
-                                <div class="quote">
-                                    <i class="lni lni-quotation"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
+    <!-- ----- Fim Fundamentos ----- -->
 
     <div class="banner-section">
         <div class="banner-area img-bg" style="background-color: #3080E3;">
@@ -240,8 +153,12 @@
                                 <div class="col-12">
                                     <div class="section-title text-center pt-60 mb-60">
                                         <h3 class="mb-15">Estamos aqui para ouvir você!</h3>
-                                        <p style="color: #fff;">Entre em contato conosco e deixe sua pergunta, sugestão ou colaboração. Estamos prontos para conversar.</p><br />
-                                        <a href="{% url 'contato' %}" rel="nofollow" target="_blank" style="background-color: white; color: #3080E3;" class="button radius-30">Entre em Contato</a>
+                                        <p style="color: #fff;">Entre em contato conosco e deixe sua pergunta,
+                                            sugestão
+                                            ou colaboração. Estamos prontos para conversar.</p><br />
+                                        <a href="{% url 'contato' %}" rel="nofollow" target="_blank"
+                                            style="background-color: white; color: #3080E3;"
+                                            class="button radius-30">Entre em Contato</a>
                                     </div>
                                 </div>
                             </section>
@@ -251,9 +168,6 @@
             </div>
         </div>
     </div>
-    
-    </div>
-    <br>
 
     {% include 'footer.html' %}
 

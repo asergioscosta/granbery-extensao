@@ -45,7 +45,7 @@ class ParceriaAdmin(admin.ModelAdmin):
 
 @admin.register(Curso)
 class CursoAdmin(admin.ModelAdmin):
-    list_display = ('nome_curso', 'descricao')
+    list_display = ('nome_curso', 'descricao', 'texto')
 
 @admin.register(Equipe)
 class EquipeAdmin(admin.ModelAdmin):

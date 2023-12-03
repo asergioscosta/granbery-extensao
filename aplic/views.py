@@ -104,9 +104,13 @@ def Cadastro(request):
     else:
         return render(request, "cadastro.html")
 
-def erro(request):
+def Erro(request):
     return render(request, 'erro.html')
 
 def custom_logout(request):
     auth_logout(request)
     return render(request, "logout.html")
+
+def saibamais(request, curso_id):
+    curso = Curso.objects.get(pk=curso_id)
+    return render(request, 'saibamais.html', {'curso': curso})

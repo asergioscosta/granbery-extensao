@@ -1,0 +1,133 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>Saiba Mais</title>
+
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+
+    <meta name="author" content="Augusto Sérgio, Carlos Eduardo, Daniel Vitor">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.svg" />
+
+    <!-- ----- Início CSS ----- -->
+    <link rel="stylesheet" href="{% static '/css/bootstrap-5.0.0-alpha-2.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/LineIcons.2.0.css' %}">
+    <link rel="stylesheet" href="{% static '/css/tiny-slider.css' %}">
+    <link rel="stylesheet" href="{% static '/css/glightbox.min.css' %}">
+    <link rel="stylesheet" href="{% static '/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static '/css/lindy-uikit.css' %}">
+    <link rel="stylesheet" href="{% static '/css/base-style.css' %}">
+    <!-- ----- Fim CSS ----- -->
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+    <!-- ----- Início Section ----- -->
+    <div class="banner-section">
+        <div class="banner-area img-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+                            <h3 class="mb-20">Saiba Mais</h3>
+                            <nav aria-label="breadcrumb">
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ----- Fim Section ----- -->
+
+    <!-- ----- Início Blog Saiba Mais ----- -->
+    <section class="blog-section pt-100">
+        <div class="container">
+            <div class="single-blog-wrapper">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-7">
+                        <div class="left-wrapper">
+                            <div class="blog-content-wrapper">
+                                <div class="image mb-35">
+                                    <img src="{{ curso.imagem.thumb.url }}" alt="{{ curso.nome }}" class="w-100">
+                                </div>
+                                <div class="content">
+                                    <h4 class="mb-25">{{ curso.nome_curso }}</h4>
+                                    <p class="mb-25">
+                                        {{ curso.texto }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- ----- Início Formulário Comentário ----- -->
+                    <div class="comment-wrapper">
+                        <div class="title">
+                            <div class="share">
+                                <ul class="socials">
+                                    <li>Compartilhe em:</li>
+                                    <li> <a href="#0"> <i class="lni lni-facebook-filled"></i> </a> </li>
+                                    <li> <a href="#0"> <i class="lni lni-instagram-filled"></i> </a> </li>
+                                    <li> <a href="#0"> <i class="lni lni-linkedin-original"></i> </a> </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ----- Fim Formulário Comentário ----- -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ----- Início Blog Saiba Mais ----- -->
+
+    <!-- ----- Início Formulário de Contato ----- -->
+    <section id="contact">
+        <div class="container">
+            <div class="comment-form-wrapper mb-70">
+                <h4 class="mb-40">Deixe um Comentário</h4>
+                <div class="container mx-auto">
+                    <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
+                        <form>
+                            <div class="mb-6">
+                                <input type="text" placeholder="Your Name"
+                                    class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-primary w-full rounded border py-3 px-[14px] text-base outline-none" />
+                            </div>
+                            <div class="mb-6">
+                                <input type="email" placeholder="Your Email"
+                                    class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-primary w-full rounded border py-3 px-[14px] text-base outline-none" />
+                            </div>
+                            <div class="mb-6">
+                                <input type="text" placeholder="Your Phone"
+                                    class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-primary w-full rounded border py-3 px-[14px] text-base outline-none" />
+                            </div>
+                            <div class="mb-6">
+                                <textarea rows="6" placeholder="Your Message"
+                                    class="border-stroke dark:border-dark-3 dark:text-dark-6 dark:bg-dark text-body-color focus:border-primary w-full resize-none rounded border py-3 px-[14px] text-base outline-none"></textarea>
+                            </div>
+                            <div class="col-xl-12">
+                                <div class="form-button text-right">
+                                    <button class="button radius-10">Enviar <i class="lni lni-telegram-original"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ----- Fim Formulário de Contato ----- -->
+
+    {% include 'footer.html' %}
+</body>
+
+</html>

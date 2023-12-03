@@ -1,7 +1,6 @@
 {% load static %}
 
-<!-- ----- navbar ----- -->
-
+<!-- ----- Início Navbar ----- -->
 <div class="navbar-area fixed-top">
     <header class="header header-4">
         <div class="navbar-area">
@@ -10,7 +9,7 @@
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg">
                             <a class="navbar-brand" href="index.html">
-                                <img src="assets/img/logo/logo.svg" alt="Logo" />
+                                <img src="{% static 'img/logo/logo.png' %}" alt="Logo" />
                             </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent4" aria-controls="navbarSupportedContent4"
@@ -45,7 +44,6 @@
                                     </li>
 
                                     <!-- ----- Início Login ----- -->
-
                                     <li class="nav-item">
                                         <a class="page-scroll" href="#0" data-bs-toggle="collapse"
                                             data-bs-target="#sub-nav2" aria-controls="sub-nav2" aria-expanded="false"
@@ -62,20 +60,16 @@
 
                                 </ul>
                             </div>
-
                             <!-- ----- Fim Login ----- -->
 
                             <!-- ----- Início Buscar ----- -->
-
                             <div class="header-search">
                                 <a href="#0"> <i class="lni lni-search-alt"></i> </a>
                                 <form action="{% url 'cursos' %}">
                                     <input id="iptText" name="iptText" type="text" placeholder="Buscar">
                                 </form>
                             </div>
-
                             <!-- ----- Fim Buscar ----- -->
-
                         </nav>
                     </div>
                 </div>
@@ -83,5 +77,4 @@
         </div>
     </header>
 </div>
-
-<!-- ----- Navbar ----- -->
+<!-- ----- Fim Navbar ----- -->
